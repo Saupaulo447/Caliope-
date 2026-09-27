@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -36,9 +40,8 @@ body {
 
 .content-box img {
     display: block;
-    margin: 0 auto 20px;
+    margin: 0 auto 80px auto; /* Centrado con 80px de espacio hacia abajo */
     border-radius: 8px;
-    margin-bottom: 80px;
 }
 
 .content-box h2 {
@@ -54,8 +57,15 @@ body {
     margin-bottom: 30px;       /* Crea una separación entre el título y las 3 columnas */
 }
 
+.fila-contacto p, 
+.fila-contacto a {
+    word-break: break-word; /* Obliga al texto a saltar a la siguiente línea si no cabe */
+    hyphens: auto;
+}
+
 /* Contenedor principal de los contactos */
 .contenedor-contactos {
+    width: 100%; /* Evita que la caja gris se desborde */
     /* Estas son las reglas que ya tenías: */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
