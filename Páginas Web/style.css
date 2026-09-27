@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'segoe UI', Roboto, Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #367adf;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10vh 0;
+}
+
+.content-box{
+    background-color: #f4f6f9;
+    width: 80vw;
+    height: auto;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.content-box h1 {
+    color: #002b5c;
+    border-bottom: 4px solid #002b5c;  /*barrita de color bajo el titulo*/
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.content-box img {
+    display: block;
+    margin: 0 auto 20px;
+    border-radius: 8px;
+    margin-bottom: 80px;
+}
+
+.content-box h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 40px;
+}
+
+.content-box h3 {
+    text-align: center;
+    font-size: 32px;
+    text-transform: uppercase; /* Pone todas las letras en mayúsculas */
+    color: #002b5c;            /* Aplica el tono azul oscuro de tu diseño */
+    margin-bottom: 30px;       /* Crea una separación entre el título y las 3 columnas */
+}
+
+/* Contenedor principal de los contactos */
+.contenedor-contactos {
+    /* Estas son las reglas que ya tenías: */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+    align-items: start;
+
+    /* --- NUEVAS REGLAS PARA EL FONDO GRIS --- */
+    background-color: #C3C3C3; /* Un tono gris claro y elegante */
+    padding: 30px;             /* Espacio interno para que los textos no toquen los bordes */
+    border-radius: 12px;       /* Hace que las esquinas del contenedor sean redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: Agrega una sombra muy suave para darle profundidad */
+}
+/* Estilo individual de cada columna */
+.columna-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Separación entre las 3 filas */
+    padding: 0 15px;
+    border-left: 2px solid #ccc; /* Línea divisoria gris */
+}
+
+/* Quita la línea divisoria a la primera columna para que quede como en la imagen */
+.columna-contacto:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Estilo para cada fila (Ícono + Texto) */
+.fila-contacto {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre el ícono y el texto */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #002b5c; /* Tono azul oscuro similar al de la imagen */
+}
+
+/* Quitamos márgenes por defecto de los párrafos para que no se desalineen */
+.fila-contacto p {
+    margin: 0;
+}
+
+/* Estilos de los enlaces (WhatsApp y Correo) */
+.fila-contacto a {
+    text-decoration: none;
+    color: #000; /* Texto en negro como en la imagen */
+}
+
+.fila-contacto a:hover {
+    text-decoration: underline;
+    color: #065ac8c5; /* Verde de WhatsApp al pasar el mouse */
+}
+
+/* Diseño responsivo para celulares */
+@media (max-width: 768px) {
+    .contenedor-contactos {
+        grid-template-columns: 1fr; /* Cambia a 1 sola columna en pantallas pequeñas */
+    }
+    
+    .columna-contacto {
+        border-left: none;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 15px;
+    }
+    
+    .columna-contacto:last-child {
+        border-bottom: none;
+    }
+}
+.fila-contacto .icono {
+    font-size: 22px; /* Cambia este valor para ajustar el tamaño del emoji */
+}
+
+/* Estilos para el logo principal */
+.logo-principal {
+    display: block;               /* Permite usar margin auto para centrar */
+    margin: 0 auto 0 auto;     /* Lo centra horizontalmente y deja 20px de espacio por debajo */
+    max-width: 100%;              /* Asegura que no se salga de la pantalla en celulares */
+    width: 800px;                 /* Tamaño sugerido. Puedes aumentar o reducir este número a tu gusto */
+}
+
+.content-box h4, 
+.content-box h5 {
+    text-align: center;      /* Centra el texto */
+    color: #002b5c;          /* Aplica el mismo azul oscuro de "Contactos" */
+    font-size: 28px;         /* Tamaño de letra ligeramente menor al h3 */
+    margin: 10px 0;          /* Agrega un pequeño espacio arriba y abajo para que no se amontonen */
+    font-weight: bold;       /* Asegura que el texto se vea grueso */
+}
