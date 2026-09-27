@@ -14,11 +14,13 @@ body {
     padding: 10vh 0;
 }
 
-.content-box{
+.content-box {
     background-color: #f4f6f9;
-    width: 80vw;
+    max-width: 1000px; /* Límite para computadoras */
+    width: 90%;        /* Adaptable para celulares */
     height: auto;
-    padding: 60px;
+    margin: 0 auto;    /* Mantiene la caja centrada */
+    padding: 30px;     /* Un punto medio de espacio interno ideal para cualquier pantalla */
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
@@ -144,4 +146,10 @@ body {
     font-size: 28px;         /* Tamaño de letra ligeramente menor al h3 */
     margin: 10px 0;          /* Agrega un pequeño espacio arriba y abajo para que no se amontonen */
     font-weight: bold;       /* Asegura que el texto se vea grueso */
+}
+
+/* Esto aplica para la tarjeta de presentación y cualquier otra imagen */
+img {
+    max-width: 100%;
+    height: auto;    /* Mantiene la proporción para que no se deforme */
 }
