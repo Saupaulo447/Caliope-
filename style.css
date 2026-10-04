@@ -51,6 +51,8 @@ body {
     line-height: 1.6;    /* Da un pequeño respiro de espacio entre cada línea de texto */
     margin-bottom: 40px; /* Mantiene la separación con el certificado de abajo */
     color: #333333;      /* Un gris muy oscuro que cansa menos la vista que el negro puro */
+    width: 85%;
+    margin: 0 auto 40px;
 }
 
 .content-box h3 {
