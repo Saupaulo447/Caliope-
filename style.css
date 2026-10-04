@@ -50,7 +50,7 @@ body {
     font-weight: normal; /* Quita las negritas para que sea texto de lectura */
     line-height: 1.6;    /* Da un pequeño respiro de espacio entre cada línea de texto */
     width: 85%;
-    margin-bottom: 40px; /* Mantiene la separación con el certificado de abajo */
+    margin-bottom: 0 auto 40px; /* Mantiene la separación con el certificado de abajo */
     color: #333333;      /* Un gris muy oscuro que cansa menos la vista que el negro puro */
 }
 
