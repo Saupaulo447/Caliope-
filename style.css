@@ -44,9 +44,13 @@ body {
     border-radius: 8px;
 }
 
-.content-box h2 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 40px;
+.content-box p {
+    text-align: justify; /* Hace que el texto quede alineado parejito de ambos lados */
+    font-size: 16px;     /* Reduce el tamaño de la letra (puedes subirlo a 18px si lo sientes muy pequeño) */
+    font-weight: normal; /* Quita las negritas para que sea texto de lectura */
+    line-height: 1.6;    /* Da un pequeño respiro de espacio entre cada línea de texto */
+    margin-bottom: 40px; /* Mantiene la separación con el certificado de abajo */
+    color: #333333;      /* Un gris muy oscuro que cansa menos la vista que el negro puro */
 }
 
 .content-box h3 {
