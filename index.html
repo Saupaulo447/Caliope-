@@ -14,6 +14,74 @@
             <img src="img/tarjeta-presentacion-recortada.jpeg" alt="tarjet">
             <h4>Distribuidor Autorizado Mitsubishi Electric</h4>
             <h5>Suministro, Instalación y Servicio de Aires Acondicionados</h5>
+
+            <!-- ================= INICIO DEL CARRUSEL ================= -->
+            <div class="carrusel-contenedor">
+                <div class="carrusel-slides" id="carruselSlides">
+                    <!-- Aquí agregas o quitas tus imágenes manualmente -->
+                    <div class="carrusel-item">
+                        <img src="img/1.jpeg" alt="Proyecto 1">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/2.jpeg" alt="Proyecto 2">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/3.jpeg" alt="Proyecto 3">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/4.jpeg" alt="Proyecto 4">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/5.jpeg" alt="Proyecto 5">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/6.jpeg" alt="Proyecto 6">
+                    </div>
+                    <div class="carrusel-item">
+                        <img src="img/7.jpeg" alt="Proyecto 7">
+                    </div>
+                </div>
+
+                <!-- Botones de navegación -->
+                <button class="carrusel-btn prev" onclick="moverCarrusel(-1)">&#10094;</button>
+                <button class="carrusel-btn next" onclick="moverCarrusel(1)">&#10095;</button>
+
+                <!-- Indicadores (se generan solos según las fotos que pongas arriba) -->
+                <div class="carrusel-indicadores" id="indicadores"></div>
+            </div>
+            <!-- ================= FIN DEL CARRUSEL ================= -->
+
+            <!-- ================= MODAL ESTILO AMAZON ================= -->
+            <div class="modal-amazon" id="modalAmazon" onclick="cerrarModalFondo(event)">
+                <div class="modal-contenido">
+                    <button class="modal-cerrar" onclick="cerrarModal()">&times;</button>
+                    
+                    <div class="modal-encabezado">
+                        <span class="pestana-activa">IMÁGENES</span>
+                    </div>
+
+                    <div class="modal-cuerpo">
+                        <!-- Lado izquierdo: Imagen en grande y lupas -->
+                        <div class="modal-visor">
+                            <img id="modalImagenGrande" src="" alt="Vista ampliada" onclick="alternarZoom()">
+                            <div class="modal-controles-zoom">
+                                <button onclick="cambiarZoom(0.25)" title="Acercar">🔍+</button>
+                                <button onclick="cambiarZoom(-0.25)" title="Alejar">🔍-</button>
+                            </div>
+                        </div>
+
+                        <!-- Lado derecho: Información y cuadrícula de miniaturas -->
+                        <div class="modal-lateral">
+                            <h4>Caliope Proyectos S.A. de C.V.</h4>
+                            <p>Galería de Equipos, Instalaciones y Proyectos</p>
+                            <div class="modal-miniaturas" id="modalMiniaturas">
+                                <!-- Se generan solas a partir de tus fotos del HTML -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ================= FIN DEL MODAL ================= -->
             
             <h3>Contactos</h3>
             <div class="contenedor-contactos">
@@ -66,5 +134,124 @@
                 </div>
             </div>
         </div>
+        <script>
+            let indiceActual = 0;
+            let nivelZoom = 1;
+            const imagenesCarrusel = document.querySelectorAll('.carrusel-item img');
+            const contenedorIndicadores = document.getElementById('indicadores');
+            const contenedorMiniaturas = document.getElementById('modalMiniaturas');
+
+            // Inicializa automáticamente los puntitos, miniaturas y el clic de cada foto del HTML
+            imagenesCarrusel.forEach((img, indice) => {
+                // 1. Al darle clic a la imagen del carrusel, abre la ventana estilo Amazon
+                img.onclick = () => abrirModal(indice);
+                img.title = "Haz clic para ver en grande";
+
+                // 2. Crea su puntito indicador abajo del carrusel
+                const punto = document.createElement('span');
+                punto.className = indice === 0 ? 'punto activo' : 'punto';
+                punto.onclick = () => irASlide(indice);
+                contenedorIndicadores.appendChild(punto);
+
+                // 3. Crea su miniatura dentro de la ventana estilo Amazon
+                const miniatura = document.createElement('img');
+                miniatura.src = img.src;
+                miniatura.alt = img.alt;
+                miniatura.className = 'miniatura-item';
+                miniatura.onclick = () => seleccionarImagenModal(indice);
+                contenedorMiniaturas.appendChild(miniatura);
+            });
+
+            // Movimiento del carrusel
+            function mostrarSlide(indice) {
+                const puntos = document.querySelectorAll('.punto');
+                const contenedorSlides = document.getElementById('carruselSlides');
+                const totalSlides = imagenesCarrusel.length;
+
+                if (indice >= totalSlides) {
+                    indiceActual = 0;
+                } else if (indice < 0) {
+                    indiceActual = totalSlides - 1;
+                } else {
+                    indiceActual = indice;
+                }
+
+                contenedorSlides.style.transform = `translateX(-${indiceActual * 100}%)`;
+
+                puntos.forEach((punto, i) => {
+                    punto.classList.toggle('activo', i === indiceActual);
+                });
+            }
+
+            function moverCarrusel(direccion) {
+                mostrarSlide(indiceActual + direccion);
+            }
+
+            function irASlide(indice) {
+                mostrarSlide(indice);
+            }
+
+            // Funciones del Modal estilo Amazon
+            function abrirModal(indice) {
+                const modal = document.getElementById('modalAmazon');
+                modal.classList.add('activo');
+                document.body.style.overflow = 'hidden'; // Bloquea el scroll de atrás
+                seleccionarImagenModal(indice);
+            }
+
+            function cerrarModal() {
+                const modal = document.getElementById('modalAmazon');
+                modal.classList.remove('activo');
+                document.body.style.overflow = 'auto';
+                resetearZoom();
+            }
+
+            function cerrarModalFondo(event) {
+                if (event.target.id === 'modalAmazon') {
+                    cerrarModal();
+                }
+            }
+
+            function seleccionarImagenModal(indice) {
+                const imgGrande = document.getElementById('modalImagenGrande');
+                const miniaturas = document.querySelectorAll('.miniatura-item');
+
+                imgGrande.src = imagenesCarrusel[indice].src;
+                resetearZoom();
+
+                miniaturas.forEach((mini, i) => {
+                    mini.classList.toggle('activa', i === indice);
+                });
+            }
+
+            // Funciones de Zoom
+            function cambiarZoom(cambio) {
+                nivelZoom += cambio;
+                if (nivelZoom < 1) nivelZoom = 1;
+                if (nivelZoom > 2.5) nivelZoom = 2.5;
+                aplicarZoom();
+            }
+
+            function alternarZoom() {
+                nivelZoom = nivelZoom === 1 ? 1.75 : 1;
+                aplicarZoom();
+            }
+
+            function resetearZoom() {
+                nivelZoom = 1;
+                aplicarZoom();
+            }
+
+            function aplicarZoom() {
+                const imgGrande = document.getElementById('modalImagenGrande');
+                imgGrande.style.transform = `scale(${nivelZoom})`;
+                imgGrande.style.cursor = nivelZoom > 1 ? 'zoom-out' : 'zoom-in';
+            }
+
+            // Permite cerrar con la tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') cerrarModal();
+            });
+        </script>
     </body>
 </html> 
